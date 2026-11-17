@@ -1,0 +1,4418 @@
+/* ============================================================
+   PREMIUM DESIGN SYSTEM — DASHBOARD DIAT v3.0
+   Diseñador Web Senior — Gobernación de Antioquia
+   Sistema de Diseño Exclusivo Modo Claro & Glassmorphism
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   1. DESIGN TOKENS OVERRIDES
+   ============================================================ */
+:root {
+    /* Tipografía Premium */
+    --font-headline: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Paleta Institucional Refinada — Verde Esmeralda Gobernación */
+    --color-primary: #0B5640;
+    --color-primary-hover: #064E3B;
+    --color-primary-light: #059669;
+    --color-primary-accent: #10B981;
+    --color-primary-subtle: #ECFDF5;
+    --color-primary-pale: rgba(11, 86, 64, 0.06);
+    --color-primary-glow: rgba(16, 185, 129, 0.22);
+
+    /* Canvas & Surfaces */
+    --color-bg: #F8FAFC;
+    --color-canvas: #F8FAFC;
+    --color-surface: #FFFFFF;
+    --color-surface-hover: #F1F5F9;
+    --color-surface-subtle: #F8FAFC;
+
+    /* Textos Refinados */
+    --color-text-primary: #0F172A;
+    --color-text-secondary: #334155;
+    --color-text-muted: #64748B;
+    --color-text-placeholder: #94A3B8;
+
+    /* Bordes */
+    --color-border: rgba(226, 232, 240, 0.85);
+    --color-border-strong: #CBD5E1;
+
+    /* Sidebar */
+    --sidebar-bg-from: #063826;
+    --sidebar-bg-to: #021810;
+    --sidebar-width: 256px;
+
+    /* Estados semánticos */
+    --color-success: #10B981;
+    --color-success-bg: rgba(16, 185, 129, 0.08);
+    --color-warning: #F59E0B;
+    --color-warning-bg: rgba(245, 158, 11, 0.08);
+    --color-danger: #EF4444;
+    --color-danger-bg: rgba(239, 68, 68, 0.08);
+    --color-info: #3B82F6;
+    --color-info-bg: rgba(59, 130, 246, 0.08);
+
+    /* Sombras multicapa elegantes */
+    --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.03);
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.03);
+    --shadow-md: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+    --shadow-lg: 0 10px 30px -4px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+    --shadow-premium: 0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 24px -4px rgba(11, 86, 64, 0.08);
+    --shadow-glow-primary: 0 4px 20px rgba(16, 185, 129, 0.25);
+
+    /* Radios de Esquinas */
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+}
+
+/* ============================================================
+   2. BASE GLOBAL
+   ============================================================ */
+
+body {
+    background: var(--color-bg) !important;
+    background-image: none !important;
+    font-family: var(--font-body) !important;
+    color: var(--color-text-primary) !important;
+    font-size: 13px !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.map-container-wrapper {
+    height: 780px;
+}
+
+/* Tipografía global */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.dashboard-title,
+.section-title,
+.filter-section-title,
+.layer-panel-title,
+.table-section h2,
+.kpi-value,
+.chart-title {
+    font-family: var(--font-headline) !important;
+}
+
+.kpi-value,
+[class*="kpi-val"],
+.stat-number {
+    font-variant-numeric: tabular-nums !important;
+}
+
+p,
+span,
+td,
+th,
+label,
+select,
+input,
+button,
+textarea,
+.filter-control,
+.alert-item-meta,
+.alert-item-tag,
+.tab-label,
+.sidebar-logo-text h2,
+.sidebar-logo-text p {
+    font-family: var(--font-body) !important;
+}
+
+/* ============================================================
+   3. LAYOUT — CARD ON CANVAS
+   ============================================================ */
+
+#app-layout {
+    background: var(--color-bg) !important;
+    gap: 0;
+    padding: 0;
+}
+
+/* Canvas de fondo con patrón sutil y gradientes de ambiente */
+#app-layout::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(ellipse at 15% 10%, rgba(16, 185, 129, 0.04) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 90%, rgba(59, 130, 246, 0.03) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+#main-content-container,
+main {
+    background: transparent !important;
+    flex: 1;
+}
+
+/* ============================================================
+   4. SIDEBAR PREMIUM — VERDE BOSQUE REFINADO CON RESPLANDOR
+   ============================================================ */
+
+.sidebar-nav {
+    background: linear-gradient(180deg, #063826 0%, #032418 55%, #021810 100%) !important;
+    width: var(--sidebar-width) !important;
+    min-width: var(--sidebar-width) !important;
+    border-radius: 0 !important;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.18), inset -1px 0 0 rgba(255, 255, 255, 0.06) !important;
+    padding: 28px 16px 20px !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Textura decorativa del sidebar */
+.sidebar-nav::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: -60px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(34, 146, 79, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.sidebar-nav::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(26, 107, 60, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* Logo del sidebar */
+.sidebar-logo-section {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+    margin-bottom: 24px !important;
+    padding-bottom: 20px !important;
+    position: relative;
+    z-index: 1;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 12px !important;
+}
+
+.sidebar-logo-ring {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 14px !important;
+    width: 58px !important;
+    height: 58px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+}
+
+.sidebar-logo-ring img {
+    width: 44px !important;
+    height: 44px !important;
+    object-fit: contain !important;
+}
+
+.sidebar-logo-text h2 {
+    font-family: var(--font-headline) !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #FFFFFF !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.01em !important;
+    margin: 0 !important;
+}
+
+.sidebar-logo-text p {
+    font-size: 8.5px !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.45) !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    margin-top: 6px !important;
+}
+
+/* Navegación del sidebar */
+.sidebar-nav nav {
+    gap: 3px !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tab buttons — inactivos */
+.tab-btn {
+    padding: 11px 14px !important;
+    border-radius: 10px !important;
+    font-size: 12.5px !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    transition: all 200ms ease !important;
+    letter-spacing: 0.01em !important;
+}
+
+/* Indicador lateral — ahora verde neón brillante */
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 3px;
+    height: 50%;
+    background: #4ADE80;
+    border-radius: 0 4px 4px 0;
+    transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
+}
+
+.tab-btn.active::before {
+    transform: translateY(-50%) scaleY(1);
+}
+
+/* Tab activo — fondo semi-transparente suave */
+.tab-btn.active {
+    background: rgba(255, 255, 255, 0.10) !important;
+    border-color: rgba(255, 255, 255, 0.10) !important;
+    color: #FFFFFF !important;
+    box-shadow: none !important;
+}
+
+.tab-btn.active .tab-label {
+    font-weight: 600 !important;
+}
+
+.tab-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.06) !important;
+    color: rgba(255, 255, 255, 0.80) !important;
+}
+
+/* Punto de actividad */
+.active-dot {
+    background: #4ADE80 !important;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.8) !important;
+    width: 6px !important;
+    height: 6px !important;
+}
+
+/* ============================================================
+   PROFILE CARD EN SIDEBAR
+   ============================================================ */
+
+.sidebar-profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.sidebar-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #22924F, #1A6B3C);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFFFFF;
+    font-family: var(--font-headline) !important;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+}
+
+.sidebar-profile-name {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #FFFFFF;
+    font-family: var(--font-headline) !important;
+    line-height: 1.2;
+}
+
+.sidebar-profile-role {
+    font-size: 9.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+/* Badge versión beta */
+.sidebar-version-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar-version-badge span {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.65);
+    font-family: var(--font-body) !important;
+}
+
+.sidebar-version-badge i {
+    color: #4ADE80;
+    font-size: 11px;
+}
+
+/* ============================================================
+   5. HEADER PREMIUM — GLASSMORPHISM & ELEVACIÓN
+   ============================================================ */
+
+header {
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03) !important;
+    height: 64px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+}
+
+.header-search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.header-search-icon {
+    position: absolute;
+    left: 14px;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    pointer-events: none;
+    transition: color 200ms ease;
+}
+
+.header-search-input {
+    background: #F8FAFC !important;
+    border: 1.5px solid rgba(226, 232, 240, 0.9) !important;
+    border-radius: var(--radius-full) !important;
+    font-family: var(--font-body) !important;
+    font-size: 12.5px !important;
+    color: var(--color-text-primary) !important;
+    padding: 8px 16px 8px 36px !important;
+    width: 240px;
+    transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.header-search-input:focus {
+    width: 300px;
+    border-color: #10B981 !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12), 0 4px 12px rgba(15, 23, 42, 0.04) !important;
+}
+
+.header-search-wrapper:focus-within .header-search-icon {
+    color: #0B5640;
+}
+
+.header-date-badge {
+    background: #F8FAFC !important;
+    border: 1.5px solid rgba(226, 232, 240, 0.9) !important;
+    border-radius: var(--radius-full) !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    color: var(--color-text-secondary) !important;
+    padding: 6px 14px !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03) !important;
+}
+
+.header-profile {
+    background: #F8FAFC !important;
+    border: 1.5px solid rgba(226, 232, 240, 0.9) !important;
+    border-radius: var(--radius-full) !important;
+    padding: 4px 12px 4px 4px !important;
+    gap: 8px !important;
+    transition: all 200ms ease !important;
+}
+
+.header-profile:hover {
+    border-color: rgba(16, 185, 129, 0.4) !important;
+    background: #ECFDF5 !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1) !important;
+}
+
+.header-profile-avatar {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 99px !important;
+    overflow: hidden;
+    border: 1.5px solid #FFFFFF;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-menu-dropdown {
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 16px 36px -4px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.04) !important;
+    backdrop-filter: blur(16px) !important;
+}
+
+.user-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 150ms ease;
+}
+
+.user-menu-item:hover {
+    background: #ECFDF5;
+    color: #0B5640;
+}
+
+/* ============================================================
+   6. KPI CARDS — NUEVO DISEÑO CON ICONO CIRCULAR
+   ============================================================ */
+
+/* ============================================================
+   6. KPI CARDS — DISEÑO COMPACTO Y EQUILIBRADO
+   ============================================================ */
+
+.kpi-card {
+    background: #FFFFFF !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: 14px !important;
+    padding: 12px 14px 10px !important;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03), 0 1px 3px rgba(15, 23, 42, 0.02) !important;
+    transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barra superior de acento sutil según tipo */
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: transparent;
+    transition: opacity 200ms ease;
+}
+
+.kpi-total::before {
+    background: linear-gradient(90deg, #64748B, #94A3B8);
+}
+
+.kpi-ejecucion::before {
+    background: linear-gradient(90deg, #059669, #10B981);
+}
+
+.kpi-por-liquidar::before {
+    background: linear-gradient(90deg, #D97706, #F59E0B);
+}
+
+.kpi-inversion::before {
+    background: linear-gradient(90deg, #7C3AED, #A855F7);
+}
+
+.kpi-desembolsado::before {
+    background: linear-gradient(90deg, #2563EB, #3B82F6);
+}
+
+.kpi-autorizado::before {
+    background: linear-gradient(90deg, #0B5640, #059669);
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.07), 0 2px 8px -2px rgba(15, 23, 42, 0.04) !important;
+    border-color: rgba(16, 185, 129, 0.35) !important;
+}
+
+.kpi-label {
+    font-family: var(--font-body) !important;
+    font-size: 9.5px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: var(--color-text-muted) !important;
+    margin-bottom: 2px !important;
+    display: block !important;
+}
+
+.kpi-value {
+    font-family: var(--font-headline) !important;
+    font-size: 21px !important;
+    font-weight: 800 !important;
+    color: var(--color-text-primary) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.02em !important;
+    font-variant-numeric: tabular-nums !important;
+}
+
+.kpi-value-large {
+    font-size: 16.5px !important;
+    letter-spacing: -0.015em !important;
+}
+
+/* Icono de KPI — tamaño compacto armonioso */
+.kpi-icon {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 9px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 13.5px !important;
+    flex-shrink: 0 !important;
+    transition: transform 200ms ease !important;
+}
+
+.kpi-card:hover .kpi-icon {
+    transform: scale(1.05);
+}
+
+/* Colores de iconos por categoría */
+.kpi-total .kpi-icon {
+    background: rgba(100, 116, 139, 0.10) !important;
+    color: #475569 !important;
+}
+
+.kpi-ejecucion .kpi-icon {
+    background: rgba(16, 185, 129, 0.12) !important;
+    color: #059669 !important;
+}
+
+.kpi-por-liquidar .kpi-icon {
+    background: rgba(245, 158, 11, 0.12) !important;
+    color: #D97706 !important;
+}
+
+.kpi-inversion .kpi-icon {
+    background: rgba(139, 92, 246, 0.12) !important;
+    color: #7C3AED !important;
+}
+
+.kpi-desembolsado .kpi-icon {
+    background: rgba(59, 130, 246, 0.12) !important;
+    color: #2563EB !important;
+}
+
+.kpi-autorizado .kpi-icon {
+    background: rgba(11, 86, 64, 0.12) !important;
+    color: #0B5640 !important;
+}
+
+/* Trend badges */
+.kpi-trend {
+    margin-top: 0 !important;
+    font-size: 9.5px !important;
+    font-weight: 700 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 3px !important;
+}
+
+.kpi-trend.up {
+    color: var(--color-success) !important;
+}
+
+.kpi-trend.down {
+    color: var(--color-danger) !important;
+}
+
+.kpi-trend.neutral {
+    color: var(--color-text-muted) !important;
+}
+
+/* ============================================================
+   7. BADGES DE ESTADO — SISTEMA TONAL SIN BORDES
+   ============================================================ */
+
+.badge-estado {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    padding: 4px 10px !important;
+    border-radius: 99px !important;
+    font-family: var(--font-body) !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    border: none !important;
+}
+
+.badge-por-liquidar {
+    background: rgba(245, 158, 11, 0.12) !important;
+    color: #B45309 !important;
+    border: none !important;
+}
+
+.badge-ejecucion {
+    background: rgba(16, 185, 129, 0.14) !important;
+    color: #047857 !important;
+    border: none !important;
+}
+
+.badge-liquidado,
+.badge-ejecutado {
+    background: rgba(59, 130, 246, 0.12) !important;
+    color: #1D4ED8 !important;
+    border: none !important;
+}
+
+.badge-suspendido {
+    background: rgba(139, 92, 246, 0.12) !important;
+    color: #6D28D9 !important;
+    border: none !important;
+}
+
+.badge-proximo {
+    background: rgba(245, 158, 11, 0.08) !important;
+    color: #92400E !important;
+    border: none !important;
+}
+
+.badge-default {
+    background: rgba(107, 114, 128, 0.10) !important;
+    color: #6B7280 !important;
+    border: none !important;
+}
+
+/* ============================================================
+   8. PANEL DE FILTROS — DISEÑO LIMPIO
+   ============================================================ */
+
+.filter-section {
+    background: #FFFFFF !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-xl) !important;
+    box-shadow: var(--shadow-sm) !important;
+    padding: 18px 22px !important;
+    position: relative !important;
+    overflow: visible !important;
+    /* Permite que los dropdowns interactivos sobresalgan */
+    z-index: 40 !important;
+    /* Eleva la sección de filtros por encima de los KPIs y gráficos de abajo */
+}
+
+.filter-panel,
+.filter-panel-collapsible.expanded {
+    overflow: visible !important;
+    /* Permite desplegar las opciones sobre otros elementos */
+}
+
+.filter-panel-collapsible:not(.expanded) {
+    max-height: 0 !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Control del orden de apilamiento de los dropdowns en la misma fila */
+.custom-select-container {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.custom-select-container.active {
+    z-index: 50 !important;
+    /* Eleva el selector abierto sobre sus hermanos y otros elementos */
+}
+
+.custom-select-dropdown {
+    position: absolute !important;
+    z-index: 100 !important;
+}
+
+.filter-section-title {
+    font-family: var(--font-body) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.10em !important;
+    text-transform: uppercase !important;
+    color: var(--color-text-secondary) !important;
+}
+
+.filter-label {
+    font-family: var(--font-body) !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: var(--color-text-muted) !important;
+    margin-bottom: 6px !important;
+}
+
+.filter-control {
+    background: var(--color-surface-subtle) !important;
+    border: 1.5px solid var(--color-border) !important;
+    border-radius: var(--radius-md) !important;
+    font-family: var(--font-body) !important;
+    font-size: 13px !important;
+    color: var(--color-text-primary) !important;
+    transition: all 200ms ease !important;
+    padding: 9px 32px 9px 12px !important;
+}
+
+.filter-control:focus {
+    border-color: var(--color-primary) !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 0 0 3px rgba(26, 107, 60, 0.10) !important;
+}
+
+/* Custom select trigger (buscador) */
+.custom-select-trigger {
+    background: var(--color-surface-subtle) !important;
+    border: 1.5px solid var(--color-border) !important;
+    border-radius: var(--radius-md) !important;
+    font-family: var(--font-body) !important;
+    font-size: 13px !important;
+    padding: 9px 12px !important;
+    transition: all 200ms ease !important;
+}
+
+.custom-select-trigger:focus,
+.custom-select-trigger.active {
+    border-color: var(--color-primary) !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 0 0 3px rgba(26, 107, 60, 0.10) !important;
+}
+
+.custom-select-dropdown {
+    border: 1.5px solid var(--color-border) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* Botón exportar */
+.btn-export-primary,
+button[id*="export"],
+.btn-export {
+    background: var(--color-primary) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    font-family: var(--font-body) !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    padding: 9px 16px !important;
+    box-shadow: 0 2px 8px rgba(26, 107, 60, 0.25) !important;
+    transition: all 200ms ease !important;
+    cursor: pointer;
+}
+
+button[id*="export"]:hover {
+    background: var(--color-primary-hover) !important;
+    box-shadow: 0 4px 14px rgba(26, 107, 60, 0.35) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* ============================================================
+   9. CHART CARDS — PANELES DE GRÁFICAS PREMIUM
+   ============================================================ */
+
+/* ============================================================
+   9. CHART CARDS — PANELES DE GRÁFICAS PREMIUM
+   ============================================================ */
+
+.chart-card {
+    background: #FFFFFF !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-xl) !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05) !important;
+    padding: 22px 22px 18px !important;
+    transition: box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1), transform 250ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease !important;
+}
+
+.chart-card:hover {
+    box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.09) !important;
+    transform: translateY(-2px) !important;
+    border-color: rgba(16, 185, 129, 0.25) !important;
+}
+
+.chart-title {
+    font-family: var(--font-headline) !important;
+    font-size: 14.5px !important;
+    font-weight: 800 !important;
+    color: var(--color-text-primary) !important;
+    text-transform: none !important;
+    letter-spacing: -0.01em !important;
+}
+
+.chart-subtitle {
+    font-family: var(--font-body) !important;
+    font-size: 11.5px !important;
+    color: var(--color-text-muted) !important;
+    margin-top: 2px !important;
+    font-weight: 500 !important;
+}
+
+/* ============================================================
+   10. TABLA PREMIUM — JERARQUÍA VISUAL CLARA
+   ============================================================ */
+
+.table-section {
+    background: #FFFFFF !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-xl) !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05) !important;
+    overflow: hidden !important;
+}
+
+.table-section h2 {
+    font-family: var(--font-headline) !important;
+    font-size: 17px !important;
+    font-weight: 800 !important;
+    color: var(--color-text-primary) !important;
+    letter-spacing: -0.01em !important;
+}
+
+.sticky-header th {
+    background: #F8FAFC !important;
+    font-family: var(--font-body) !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    color: var(--color-text-muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    border-bottom: 1.5px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02) !important;
+    padding: 14px 18px !important;
+}
+
+.table-row-hover {
+    transition: background 150ms ease !important;
+}
+
+.table-row-hover:hover {
+    background: #F0FDF4 !important;
+}
+
+.table-row-hover td {
+    font-family: var(--font-body) !important;
+    font-size: 12.5px !important;
+    color: var(--color-text-primary) !important;
+    border-bottom: 1px solid rgba(241, 245, 249, 0.9) !important;
+    padding: 13px 18px !important;
+}
+
+/* Chip de municipio */
+.municipio-chip {
+    font-family: var(--font-body) !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    color: #064E3B !important;
+    background: #ECFDF5 !important;
+    border: 1px solid rgba(16, 185, 129, 0.25) !important;
+    border-radius: 8px !important;
+    padding: 3px 9px !important;
+    display: inline-block;
+}
+
+/* Botón FICHA — outline premium */
+.btn-gestion {
+    background: #FFFFFF !important;
+    color: #0B5640 !important;
+    border: 1.5px solid #0B5640 !important;
+    border-radius: var(--radius-md) !important;
+    font-family: var(--font-body) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.03em !important;
+    padding: 6px 13px !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+    transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+    cursor: pointer;
+}
+
+.btn-gestion .icon-accent {
+    color: inherit !important;
+}
+
+.btn-gestion:hover {
+    background: #0B5640 !important;
+    color: #FFFFFF !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 14px rgba(11, 86, 64, 0.25) !important;
+}
+
+/* Progress bars refinadas */
+.progress-track {
+    height: 7px !important;
+    background: #E2E8F0 !important;
+    border-radius: var(--radius-full) !important;
+    overflow: hidden;
+}
+
+.progress-fisico {
+    background: linear-gradient(90deg, #0B5640, #10B981) !important;
+    border-radius: var(--radius-full) !important;
+}
+
+.progress-financiero {
+    background: linear-gradient(90deg, #2563EB, #60A5FA) !important;
+    border-radius: var(--radius-full) !important;
+}
+
+/* ============================================================
+   11. ALERTAS — CENTRO DE ALERTAS REFINADO
+   ============================================================ */
+
+.alert-filter-btn {
+    font-family: var(--font-body) !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    border-radius: 99px !important;
+    padding: 5px 12px !important;
+    border: 1.5px solid var(--color-border) !important;
+    background: var(--color-surface-subtle) !important;
+    color: var(--color-text-secondary) !important;
+    transition: all 200ms ease !important;
+    cursor: pointer;
+}
+
+.alert-filter-btn.active {
+    background: var(--color-primary) !important;
+    color: #FFFFFF !important;
+    border-color: var(--color-primary) !important;
+}
+
+.alert-filter-btn:hover:not(.active) {
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary) !important;
+}
+
+/* Botón de exportación PDF en Centro de Alertas */
+#btn-export-alerts-pdf {
+    padding: 3.5px 10px !important;
+    font-size: 10px !important;
+    border-radius: 99px !important;
+    white-space: nowrap !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+    box-shadow: 0 2px 8px rgba(11, 86, 64, 0.25) !important;
+    gap: 5px !important;
+    transition: all 180ms ease !important;
+}
+
+#btn-export-alerts-pdf:hover {
+    transform: translateY(-1px) scale(1.02) !important;
+    box-shadow: 0 4px 12px rgba(11, 86, 64, 0.35) !important;
+}
+
+#btn-export-alerts-pdf:active {
+    transform: translateY(0) scale(0.99) !important;
+}
+
+/* Filas de alerta */
+.alert-item {
+    border-left: 3px solid transparent !important;
+    transition: background 150ms ease !important;
+    padding: 10px 14px !important;
+    border-radius: 0 8px 8px 0 !important;
+}
+
+.alert-item:hover {
+    background: var(--color-surface-subtle) !important;
+}
+
+/* ============================================================
+   12. PANEL DE INDICADORES ESTRATÉGICOS
+   ============================================================ */
+
+/* Tarjetas de Indicadores */
+.indicator-card,
+[class*="indicator"] .bg-white {
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* Cards de resumen de indicadores (metas cumplidas, en proceso, riesgo) */
+.bg-green-50,
+.bg-yellow-50,
+.bg-red-50,
+[class*="metas-"] {
+    border-radius: var(--radius-lg) !important;
+    border: 1px solid var(--color-border) !important;
+}
+
+/* ============================================================
+   13. SECCIONES GENERALES DE PANELES
+   ============================================================ */
+
+/* Todas las secciones de contenido */
+.tab-content>section,
+.tab-content>div>section,
+.bg-white.rounded-2xl,
+.bg-white.rounded-xl,
+.bg-white.p-6,
+.bg-white.p-5,
+.bg-white.p-4 {
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-xl) !important;
+    box-shadow: var(--shadow-sm) !important;
+    background: #FFFFFF !important;
+}
+
+/* Sobrescritura de bordes de Tailwind */
+.border,
+.border-gray-100,
+.border-gray-200 {
+    border-color: var(--color-border) !important;
+}
+
+/* ============================================================
+   14. BOTONES UTILITARIOS
+   ============================================================ */
+
+.btn-export,
+button.btn-export {
+    background: var(--color-surface-subtle) !important;
+    border: 1.5px solid var(--color-border) !important;
+    color: var(--color-text-secondary) !important;
+    border-radius: var(--radius-md) !important;
+    font-family: var(--font-body) !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    transition: all 200ms ease !important;
+}
+
+.btn-export:hover {
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary) !important;
+    background: var(--color-primary-subtle) !important;
+}
+
+/* Botón de limpiar filtros */
+.btn-ghost,
+button[id*="limpiar"],
+button[id*="clear"] {
+    background: transparent !important;
+    border: 1.5px solid var(--color-border) !important;
+    color: var(--color-text-muted) !important;
+    border-radius: var(--radius-md) !important;
+    font-family: var(--font-body) !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    transition: all 200ms ease !important;
+    cursor: pointer;
+}
+
+.btn-ghost:hover,
+button[id*="limpiar"]:hover,
+button[id*="clear"]:hover {
+    border-color: var(--color-border-strong) !important;
+    color: var(--color-text-secondary) !important;
+}
+
+/* Botón de filtros avanzados */
+#btn-toggle-filters,
+#btn-toggle-map-filters {
+    background: var(--color-surface-subtle) !important;
+    border: 1.5px solid var(--color-border) !important;
+    color: var(--color-text-secondary) !important;
+    border-radius: var(--radius-md) !important;
+    font-family: var(--font-body) !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    transition: all 200ms ease !important;
+    cursor: pointer;
+}
+
+/* ============================================================
+   15. PANTALLA COMPLETA DEL MAPA
+   ============================================================ */
+
+.map-container-wrapper.fullscreen {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+/* Panel de capas del mapa */
+.map-layers-panel {
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-md) !important;
+    background: rgba(255, 255, 255, 0.97) !important;
+    backdrop-filter: blur(12px) !important;
+}
+
+/* ============================================================
+   16. SCROLLBARS REFINADOS
+   ============================================================ */
+
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+}
+
+/* ============================================================
+   17. ANIMACIONES PREMIUM
+   ============================================================ */
+
+@keyframes fadeUpIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.kpi-card {
+    animation: fadeUpIn 0.35s ease both;
+}
+
+.kpi-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.kpi-card:nth-child(2) {
+    animation-delay: 0.10s;
+}
+
+.kpi-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.kpi-card:nth-child(4) {
+    animation-delay: 0.20s;
+}
+
+.kpi-card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.kpi-card:nth-child(6) {
+    animation-delay: 0.30s;
+}
+
+/* ============================================================
+   18. MODAL DE CONVENIOS PREMIUM
+   ============================================================ */
+
+.modal-content,
+.modal-overlay>div {
+    border-radius: var(--radius-2xl) !important;
+    border: 1px solid var(--color-border) !important;
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* ============================================================
+   19. TEXTOS Y ENCABEZADOS DE SECCIÓN
+   ============================================================ */
+
+.section-title,
+.filter-section-title,
+.layer-panel-title,
+.table-section h2 {
+    font-family: var(--font-headline) !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Subtítulos de sección */
+.chart-subtitle,
+.filter-section-subtitle,
+.section-subtitle {
+    font-family: var(--font-body) !important;
+    color: var(--color-text-muted) !important;
+}
+
+/* ============================================================
+   20. ACTIVE FILTERS BADGE
+   ============================================================ */
+
+.filter-active-badge,
+#active-filters-badge,
+#map-active-filters-badge {
+    background: var(--color-primary) !important;
+    color: #FFFFFF !important;
+    border-radius: 99px !important;
+    font-family: var(--font-body) !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    padding: 2px 8px !important;
+}
+
+/* ============================================================
+   21. PANEL RESUMEN DE INDICADORES (Cards de KPI de metas)
+   ============================================================ */
+
+/* Cards de metas cumplidas/en proceso/en riesgo */
+[class*="bg-green"][class*="50"],
+[class*="bg-yellow"][class*="50"],
+[class*="bg-red"][class*="50"] {
+    border-radius: var(--radius-lg) !important;
+}
+
+/* ============================================================
+   22. MAPA — CABECERA DE SECCIÓN
+   ============================================================ */
+
+.map-section-header {
+    font-family: var(--font-headline) !important;
+    font-weight: 700 !important;
+    color: var(--color-text-primary) !important;
+}
+
+#btn-map-fullscreen {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1.5px solid var(--color-border) !important;
+    border-radius: var(--radius-md) !important;
+    color: var(--color-text-secondary) !important;
+    box-shadow: var(--shadow-sm) !important;
+    backdrop-filter: blur(8px) !important;
+    transition: all 200ms ease !important;
+}
+
+#btn-map-fullscreen:hover {
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary) !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* ============================================================
+   23. AJUSTES FINALES DE ARMONÍA
+   ============================================================ */
+
+/* KPI con valor largo (moneda) — mantener visible */
+.kpi-value,
+.kpi-value-large {
+    color: var(--color-text-primary) !important;
+    opacity: 1 !important;
+}
+
+/* Sub-badges de KPI (Total, Activo, Pendiente, etc.) */
+.kpi-card [class*="text-emerald"],
+.kpi-card [class*="text-green"] {
+    color: var(--color-primary-light) !important;
+}
+
+.kpi-card [class*="text-orange"],
+.kpi-card [class*="text-amber"] {
+    color: #D97706 !important;
+}
+
+/* Panel de indicadores estratégicos — tarjetas */
+.panel-indicador-card,
+[class*="indicator-card"] {
+    background: #FFFFFF !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* Barra de progreso de indicadores — colores semánticos */
+.progress-bar-indicator {
+    border-radius: var(--radius-full) !important;
+}
+
+/* Cabecera de sección de indicadores */
+.plan-section-header,
+.plan-header {
+    font-family: var(--font-headline) !important;
+    font-weight: 700 !important;
+}
+
+/* Fondo del panel principal */
+.tab-content {
+    background: transparent !important;
+}
+
+/* Separadores de tabla */
+table tr {
+    border-bottom: 1px solid var(--color-border) !important;
+}
+
+table tr:last-child {
+    border-bottom: none !important;
+}
+
+/* Header de tabla rediseñado */
+table thead tr {
+    background: var(--color-surface-subtle) !important;
+}
+
+table thead th {
+    font-family: var(--font-body) !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+    color: var(--color-text-muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    padding: 12px 16px !important;
+}
+
+table tbody td {
+    font-family: var(--font-body) !important;
+    font-size: 13px !important;
+    padding: 14px 16px !important;
+    color: var(--color-text-primary) !important;
+    vertical-align: middle !important;
+}
+
+/* Línea de avance en tarjetas de indicadores */
+.indicator-progress-line {
+    height: 4px !important;
+    border-radius: var(--radius-full) !important;
+    background: var(--color-border) !important;
+}
+
+/* Gráfico de líneas de indicadores — área fill */
+canvas {
+    border-radius: var(--radius-md) !important;
+}
+
+/* Panel de Alertas: botones de filtro */
+.alert-tabs .alert-filter-btn,
+button[onclick*="setAlertFilter"],
+[id*="filter-btn"] {
+    font-family: var(--font-body) !important;
+    border-radius: 99px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    transition: all 200ms ease !important;
+}
+
+/* Badge de número de alertas */
+.alerts-count-badge,
+[class*="alert-count"] {
+    background: var(--color-danger) !important;
+    color: #FFFFFF !important;
+    border-radius: 99px !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    padding: 2px 8px !important;
+}
+
+/* Sección del mapa territorial — contenedor */
+.map-container-wrapper {
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-xl) !important;
+    overflow: hidden !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* Legend items del mapa */
+.map-legend-item {
+    font-family: var(--font-body) !important;
+    font-size: 11px !important;
+}
+
+/* Tooltip de barras del gráfico */
+.chartjs-tooltip {
+    border-radius: var(--radius-md) !important;
+    font-family: var(--font-body) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* Panel de Indicadores Estratégicos (cards de porcentaje) */
+.indicator-pct-card {
+    background: #FFFFFF !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: 16px !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* Colores semánticos para porcentajes de indicadores */
+.pct-low {
+    color: var(--color-danger) !important;
+}
+
+.pct-mid {
+    color: var(--color-warning) !important;
+}
+
+.pct-high {
+    color: var(--color-success) !important;
+}
+
+/* Arreglo de color de texto en resumen de indicadores (metas cards) */
+.meta-card {
+    background: #FFFFFF !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+/* Toggle de fuente de datos */
+.toggle-btn-group button {
+    font-family: var(--font-body) !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    border-radius: var(--radius-md) !important;
+}
+
+/* Paginación de la tabla */
+.pagination-btn {
+    font-family: var(--font-body) !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    border: 1.5px solid var(--color-border) !important;
+    border-radius: var(--radius-sm) !important;
+    color: var(--color-text-secondary) !important;
+    background: #FFFFFF !important;
+    transition: all 200ms ease !important;
+}
+
+.pagination-btn:hover {
+    border-color: var(--color-primary) !important;
+    color: var(--color-primary) !important;
+    background: var(--color-primary-subtle) !important;
+}
+
+/* Texto de paginación */
+.pagination-info {
+    font-family: var(--font-body) !important;
+    font-size: 12px !important;
+    color: var(--color-text-muted) !important;
+}
+
+/* IDs de convenios en tabla */
+td .convenio-id,
+.convenio-id {
+    font-family: var(--font-headline) !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    color: var(--color-primary) !important;
+    letter-spacing: 0.01em !important;
+}
+
+/* Footer del mapa territorial con leyenda */
+.map-legend {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid var(--color-border) !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* ============================================================
+   24. MICRO-ANIMACIONES Y MICRO-INTERACCIONES
+   ============================================================ */
+
+/* Transición en todas las cards */
+.kpi-card,
+.chart-card,
+.filter-section,
+.table-section,
+.alert-item {
+    will-change: transform;
+}
+
+/* Hover en filas de la leyenda del estado */
+.estado-legend-row:hover {
+    background: var(--color-surface-hover) !important;
+    border-color: var(--color-primary) !important;
+    border-radius: 10px !important;
+}
+
+/* Indicador de punto activo — actualizado */
+@keyframes indicatorPulsePremium {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px rgba(74, 222, 128, 0);
+    }
+}
+
+.active-dot {
+    animation: indicatorPulsePremium 2.5s ease-in-out infinite !important;
+}
+
+/* Transición del sidebar */
+.tab-btn {
+    will-change: background, color;
+}
+
+/* Animación para el efecto de franjas en la barra de progreso horizontal */
+@keyframes progress-bar-stripes {
+    0% {
+        background-position: 1rem 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* ============================================================
+   25. RESPONSIVIDAD MÓVIL Y OPTIMIZACIÓN DE ALINEACIÓN
+   ============================================================ */
+
+/* Prevenir tap highlights en móviles */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Touch scrolling suave */
+.custom-scrollbar,
+.table-container-scroll,
+.overflow-x-auto,
+.overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Reglas para pantallas medianas y móviles (< 1024px) */
+@media (max-width: 1023px) {
+    .sidebar-nav {
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Reglas para tablets y teléfonos (< 768px) */
+@media (max-width: 768px) {
+
+    /* Ajuste del área de contenido principal */
+    main.custom-scrollbar {
+        padding: 14px 12px !important;
+    }
+
+    /* Ajuste de filtros */
+    .filter-section-header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+    }
+
+    .filter-section-title {
+        font-size: 13px !important;
+    }
+
+    .btn-filter-toggle,
+    .btn-pdf,
+    .btn-reset,
+    .btn-export {
+        padding: 8px 10px !important;
+        font-size: 11px !important;
+    }
+
+    /* KPI Cards scaling */
+    .kpi-card {
+        padding: 12px 14px !important;
+    }
+
+    .kpi-card .kpi-icon {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 13px !important;
+    }
+
+    .kpi-card .kpi-label {
+        font-size: 10px !important;
+    }
+
+    .kpi-card .kpi-value {
+        font-size: 20px !important;
+    }
+
+    .kpi-value-large {
+        font-size: 16px !important;
+    }
+
+    .kpi-trend {
+        font-size: 9px !important;
+        padding: 2px 6px !important;
+        white-space: nowrap !important;
+    }
+
+    /* Directing & Tables */
+    .table-section .p-5 {
+        padding: 12px 14px !important;
+    }
+
+    .sticky-header th {
+        padding: 10px 12px !important;
+        font-size: 9px !important;
+    }
+
+    .table-container-scroll td {
+        padding: 10px 12px !important;
+        font-size: 11px !important;
+    }
+
+    /* Paginación de tabla */
+    .table-section .p-4.flex {
+        flex-direction: column !important;
+        gap: 10px !important;
+        align-items: center !important;
+    }
+
+    .btn-page {
+        padding: 6px 10px !important;
+        font-size: 10px !important;
+    }
+
+    /* Mapa interactivo responsive */
+    .map-container-wrapper {
+        height: 480px !important;
+    }
+
+    .map-search-container {
+        left: 8px !important;
+        right: 8px !important;
+        width: auto !important;
+        top: 8px !important;
+    }
+
+    .map-search-bar input {
+        font-size: 12px !important;
+        padding: 8px 12px 8px 34px !important;
+    }
+
+    .map-layer-panel {
+        top: 60px !important;
+        right: 8px !important;
+        left: auto !important;
+        width: 220px !important;
+        max-height: 280px !important;
+        overflow-y: auto !important;
+    }
+
+    /* Modales */
+    .modal-overlay>div {
+        max-height: 94dvh !important;
+        margin: 8px !important;
+    }
+}
+
+/* Reglas para teléfonos estrechos (< 480px) */
+@media (max-width: 480px) {
+    main.custom-scrollbar {
+        padding: 10px 8px !important;
+    }
+
+    .header-search-input {
+        width: 120px !important;
+        font-size: 11px !important;
+        padding: 6px 12px 6px 32px !important;
+    }
+
+    .header-search-icon {
+        font-size: 11px !important;
+        left: 10px !important;
+    }
+
+    /* Resumen de avance del plan */
+    .plan-promedio-section {
+        padding: 14px 12px !important;
+    }
+
+    .plan-promedio-marker {
+        font-size: 8px !important;
+    }
+
+    /* Tarjetas KPI en 2 columnas muy compactas */
+    .kpi-card {
+        padding: 10px 10px !important;
+    }
+
+    .kpi-card .kpi-value {
+        font-size: 18px !important;
+    }
+
+    .kpi-value-large {
+        font-size: 14px !important;
+    }
+
+    /* Desplegable menú usuario */
+    .user-menu-dropdown {
+        width: 200px !important;
+        right: -8px !important;
+    }
+}
+
+/* ============================================================
+   26. BOTÓN REFRESCAR Y ANIMACIÓN DE CONFIRMACIÓN
+   ============================================================ */
+
+.btn-header-refresh {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #FFFFFF;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: 6px 14px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    user-select: none;
+    white-space: nowrap;
+}
+
+.btn-header-refresh:hover {
+    background: #E8F5EE;
+    border-color: #1A6B3C;
+    color: #1A6B3C;
+    box-shadow: 0 4px 14px rgba(26, 107, 60, 0.15);
+    transform: translateY(-1px);
+}
+
+.btn-header-refresh:active {
+    transform: translateY(0) scale(0.97);
+}
+
+.btn-header-refresh.is-success {
+    background: #E8F5EE !important;
+    border-color: #10B981 !important;
+    color: #018D38 !important;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2) !important;
+}
+
+/* Animación de destello al actualizar contenido */
+@keyframes dashboardRefreshPulse {
+    0% {
+        opacity: 0.35;
+        transform: scale(0.994);
+        filter: blur(2px);
+    }
+
+    60% {
+        opacity: 0.9;
+        filter: blur(0px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+    }
+}
+
+.refresh-flash-anim {
+    animation: dashboardRefreshPulse 0.55s cubic-bezier(0.16, 1, 0.3, 1) ease-out !important;
+}
+
+/* ============================================================
+   27. MAPA MINIMALISTA Y MÁSCARA TERRITORIAL
+   ============================================================ */
+
+/* Rediseño minimalista de la barra de búsqueda del mapa */
+.map-search-bar {
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    border-radius: 14px !important;
+    padding: 8px 14px !important;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08) !important;
+    transition: all 0.25s ease !important;
+}
+
+.map-search-bar:focus-within {
+    background: #FFFFFF !important;
+    border-color: #1A6B3C !important;
+    box-shadow: 0 6px 24px rgba(26, 107, 60, 0.16) !important;
+}
+
+/* Rediseño minimalista del panel flotante de capas */
+.map-layer-panel {
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.09) !important;
+    width: 230px !important;
+}
+
+.layer-panel-header {
+    background: linear-gradient(135deg, #163D26 0%, #0D2718 100%) !important;
+    padding: 8px 12px !important;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.layer-item {
+    font-size: 11px !important;
+    padding: 6px 8px !important;
+    border-radius: 8px !important;
+    transition: background 0.15s ease !important;
+}
+
+.layer-item:hover {
+    background: rgba(26, 107, 60, 0.06) !important;
+}
+
+/* Rediseño del popup flotante de mapa */
+.map-info-popup .maplibregl-popup-content {
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.96) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 12px 36px rgba(15, 23, 42, 0.12) !important;
+}
+
+/* Ajustes gráficos ligeros y minimalistas */
+.chart-card {
+    border-radius: 18px !important;
+}
+
+/* ============================================================
+   28. MODALES GLASSMORPHIC & TOAST NOTIFICATION PREMIUM
+   ============================================================ */
+
+.modal-overlay {
+    background: rgba(15, 23, 42, 0.45) !important;
+    backdrop-filter: blur(8px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+}
+
+.modal-overlay>div {
+    border-radius: 24px !important;
+    box-shadow: 0 25px 60px -12px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset !important;
+}
+
+#toast-notification {
+    background: linear-gradient(135deg, #0B5640, #059669) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 12px 32px rgba(11, 86, 64, 0.35) !important;
+    backdrop-filter: blur(12px) !important;
+}
+
+/* Transición suave para botones y selectores */
+button,
+select,
+input,
+.tab-btn,
+.kpi-card,
+.alert-filter-btn {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* ============================================================
+   29. GEOVISOR TERRITORIAL SINTÉTICO MINIMALISTA
+   ============================================================ */
+.synthetic-mode-btn {
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 8px;
+    color: #64748B;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+}
+
+.synthetic-mode-btn:hover {
+    color: #0F172A;
+    background: rgba(241, 245, 249, 0.8);
+}
+
+.synthetic-mode-btn.active {
+    background: #0B5640;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 8px rgba(11, 86, 64, 0.3);
+}
+
+/* Tooltip sintético minimalista perfectamente centrado */
+.synthetic-tooltip {
+    max-width: 320px !important;
+    z-index: 100 !important;
+}
+
+.synthetic-tooltip .maplibregl-popup-content,
+.synthetic-tooltip .mapboxgl-popup-content {
+    background: rgba(15, 23, 42, 0.96) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    color: #FFFFFF !important;
+    border-radius: 14px !important;
+    padding: 14px 16px !important;
+    font-size: 11px !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.4) !important;
+}
+
+.synthetic-tooltip .maplibregl-popup-tip,
+.synthetic-tooltip .mapboxgl-popup-tip {
+    border-top-color: rgba(15, 23, 42, 0.96) !important;
+    border-bottom-color: rgba(15, 23, 42, 0.96) !important;
+}
+
+.synthetic-tooltip .maplibregl-popup-close-button {
+    color: #94A3B8;
+    font-size: 16px;
+    padding: 4px 8px;
+    right: 4px;
+    top: 4px;
+}
+
+.synthetic-tooltip .maplibregl-popup-close-button:hover {
+    color: #FFFFFF;
+    background: transparent;
+}
+
+.btn-popup-ficha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    padding: 7px 12px;
+    background: linear-gradient(135deg, #0B5640, #018D38);
+    color: #FFFFFF !important;
+    font-size: 11px;
+    font-weight: 800;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(11, 86, 64, 0.3);
+    transition: all 0.2s ease;
+}
+
+.btn-popup-ficha:hover {
+    background: linear-gradient(135deg, #018D38, #10B981);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(1, 141, 56, 0.4);
+}
+
+/* Animación sutil de filtro en el mapa */
+@keyframes synFilterFlash {
+    0% {
+        box-shadow: inset 0 0 0 2px rgba(0, 230, 118, 0.8), 0 0 24px rgba(0, 230, 118, 0.3);
+    }
+
+    40% {
+        box-shadow: inset 0 0 0 3px rgba(0, 230, 118, 0.9), 0 0 36px rgba(0, 230, 118, 0.45);
+    }
+
+    100% {
+        box-shadow: none;
+    }
+}
+
+.syn-filter-flash {
+    animation: synFilterFlash 0.8s ease-out forwards;
+}
+
+
+
+.synthetic-circuit-marker {
+    background: #0B5640;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 9px;
+    border-radius: 99px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #FFFFFF;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.synthetic-circuit-marker:hover {
+    transform: scale(1.25);
+    background: #00B0FF;
+    color: #0F172A;
+}
+
+/* =============================================================================
+   30. ASISTENTE VIRTUAL E INTELIGENCIA ARTIFICIAL DIAT (CHATBOT FLOTANTE)
+   ============================================================================= */
+
+/* Botón Flotante (FAB) */
+.diat-ai-fab-container {
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    pointer-events: auto !important;
+}
+
+.diat-ai-fab-badge-hint {
+    background: #0F172A;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 99px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: diatFabHintPulse 3s infinite ease-in-out;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+@keyframes diatFabHintPulse {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.95;
+    }
+
+    50% {
+        transform: translateY(-3px);
+        opacity: 1;
+    }
+}
+
+.diat-ai-fab-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0B5640 0%, #043828 100%);
+    color: #FFFFFF;
+    border: 2px solid rgba(0, 255, 136, 0.4);
+    box-shadow: 0 8px 25px rgba(11, 86, 64, 0.4), 0 0 15px rgba(0, 255, 136, 0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    outline: none;
+}
+
+.diat-ai-fab-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 12px 30px rgba(11, 86, 64, 0.55), 0 0 25px rgba(0, 255, 136, 0.5);
+    border-color: #00FF88;
+}
+
+.diat-ai-fab-btn .online-ping {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 13px;
+    height: 13px;
+    background: #00FF88;
+    border: 2px solid #0B5640;
+    border-radius: 50%;
+}
+
+.diat-ai-fab-btn .online-ping::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: #00FF88;
+    opacity: 0.75;
+    animation: pingRing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes pingRing {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+/* Ventana Principal del Chat */
+.diat-ai-chat-window {
+    position: fixed;
+    bottom: 92px;
+    right: 24px;
+    width: 430px;
+    max-width: calc(100vw - 32px);
+    height: 600px;
+    max-height: calc(100vh - 120px);
+    background: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.3), 0 0 0 1px rgba(11, 86, 64, 0.15);
+    display: flex;
+    flex-direction: column;
+    z-index: 10000;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: bottom right;
+}
+
+.diat-ai-chat-window.minimized {
+    height: 60px;
+    overflow: hidden;
+}
+
+.diat-ai-chat-window.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.85) translateY(20px);
+    visibility: hidden;
+}
+
+/* Header del Chat */
+.diat-ai-header {
+    background: linear-gradient(135deg, #0B5640 0%, #064E3B 100%);
+    color: #FFFFFF;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    user-select: none;
+}
+
+.diat-ai-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #00FF88;
+    box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
+}
+
+.diat-ai-header-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #FFFFFF;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.15s ease;
+}
+
+.diat-ai-header-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+/* Cuerpo de Mensajes */
+.diat-ai-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    background: #F8FAFC;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scroll-behavior: smooth;
+}
+
+/* Burbujas de Mensaje */
+.diat-msg {
+    display: flex;
+    gap: 10px;
+    max-width: 90%;
+    animation: diatMsgFadeIn 0.25s ease-out;
+}
+
+@keyframes diatMsgFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.diat-msg.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.diat-msg.bot {
+    align-self: flex-start;
+}
+
+.diat-msg-bubble {
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 12px;
+    line-height: 1.45;
+    word-break: break-word;
+}
+
+.diat-msg.user .diat-msg-bubble {
+    background: #0B5640;
+    color: #FFFFFF;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 2px 6px rgba(11, 86, 64, 0.2);
+}
+
+.diat-msg.bot .diat-msg-bubble {
+    background: #FFFFFF;
+    color: #1E293B;
+    border: 1px solid #E2E8F0;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Tarjetas de Información en Respuestas de la IA */
+.diat-ai-card {
+    background: #FAFCFB;
+    border: 1px solid #E2E8F0;
+    border-left: 3.5px solid #0B5640;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-top: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.diat-ai-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin: 8px 0;
+}
+
+.diat-ai-kpi-item {
+    background: #F1F5F9;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #E2E8F0;
+}
+
+.diat-ai-progress-track {
+    width: 100%;
+    height: 6px;
+    background: #E2E8F0;
+    border-radius: 99px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.diat-ai-progress-bar {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.4s ease;
+}
+
+/* Botones de Acción dentro del Chat */
+.diat-action-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #E2E8F0;
+}
+
+.diat-action-btn {
+    background: #F8FAFC;
+    border: 1px solid #CBD5E1;
+    color: #0B5640;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+}
+
+.diat-action-btn:hover {
+    background: #0B5640;
+    color: #FFFFFF;
+    border-color: #0B5640;
+    transform: translateY(-1px);
+}
+
+/* Sugerencias Rápidas */
+.diat-ai-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+.diat-suggestion-chip {
+    background: #E6F4EA;
+    color: #0B5640;
+    border: 1px solid rgba(11, 86, 64, 0.25);
+    border-radius: 99px;
+    padding: 4px 10px;
+    font-size: 10.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.diat-suggestion-chip:hover {
+    background: #0B5640;
+    color: #FFFFFF;
+    border-color: #0B5640;
+    transform: scale(1.02);
+}
+
+/* Indicador de Escritura */
+.diat-typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+}
+
+.diat-typing-dot {
+    width: 6px;
+    height: 6px;
+    background: #0B5640;
+    border-radius: 50%;
+    animation: diatTyping 1.4s infinite ease-in-out;
+}
+
+.diat-typing-dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.diat-typing-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.diat-typing-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes diatTyping {
+
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.35;
+    }
+
+    30% {
+        transform: translateY(-4px);
+        opacity: 1;
+    }
+}
+
+/* Footer / Input del Chat */
+.diat-ai-footer {
+    padding: 12px 14px;
+    background: #FFFFFF;
+    border-top: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.diat-ai-input {
+    flex: 1;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-family: inherit;
+    color: #1E293B;
+    background: #F8FAFC;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.diat-ai-input:focus {
+    border-color: #0B5640;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(11, 86, 64, 0.12);
+}
+
+.diat-ai-send-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #0B5640;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.diat-ai-send-btn:hover {
+    background: #064E3B;
+    transform: scale(1.05);
+}
+
+.diat-ai-send-btn:disabled {
+    background: #CBD5E1;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Indicadores Estratégicos dentro del Chatbot DIAT AI */
+.diat-ai-ind-card {
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 9px;
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    transition: all 0.18s ease;
+}
+
+.diat-ai-ind-card:hover {
+    border-color: #0B5640;
+    background: #F8FAFC;
+    box-shadow: 0 3px 8px rgba(11, 86, 64, 0.08);
+    transform: translateY(-1px);
+}
+
+.diat-ai-ind-badge {
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 99px;
+    letter-spacing: 0.03em;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.diat-ai-ind-badge.cumplida {
+    background: #ECFDF5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+}
+
+.diat-ai-ind-badge.proceso {
+    background: #FFFBEB;
+    color: #B45309;
+    border: 1px solid #FDE68A;
+}
+
+.diat-ai-ind-badge.riesgo {
+    background: #FEF2F2;
+    color: #991B1B;
+    border: 1px solid #FECACA;
+}
+
+.diat-ai-ind-badge.np {
+    background: #F1F5F9;
+    color: #64748B;
+    border: 1px solid #CBD5E1;
+}
+
+.diat-ai-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5px;
+    margin-top: 6px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+}
+
+.diat-ai-table th {
+    background: #F8FAFC;
+    color: #475569;
+    font-weight: 700;
+    padding: 5px 8px;
+    text-align: left;
+    border-bottom: 1px solid #E2E8F0;
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.diat-ai-table td {
+    padding: 5px 8px;
+    border-bottom: 1px solid #F1F5F9;
+    color: #1E293B;
+}
+
+.diat-ai-table tr:last-child td {
+    border-bottom: none;
+}
+
+.diat-ai-table tr.highlight-row {
+    background: #ECFDF5;
+    font-weight: 700;
+}
+
+/* ============================================================
+   CONTROL DE VISITAS TÉCNICAS — PREMIUM STYLES
+   ============================================================ */
+
+.vt-kpi-card {
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vt-kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.08);
+}
+
+.vt-state-chip {
+    cursor: pointer;
+    background: transparent;
+    color: #64748B;
+    border: 1px solid transparent;
+}
+
+.vt-state-chip.active {
+    background: #FFFFFF !important;
+    color: #0F172A !important;
+    border: 1px solid #CBD5E1 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06) !important;
+}
+
+.vt-state-chip[data-estado="Realizada"].active {
+    color: #065F46 !important;
+    border-color: #A7F3D0 !important;
+    background: #ECFDF5 !important;
+}
+
+.vt-state-chip[data-estado="Programada"].active {
+    color: #92400E !important;
+    border-color: #FDE68A !important;
+    background: #FFFBEB !important;
+}
+
+/* Pines Personalizados de Leaflet para Visitas */
+.custom-vt-div-icon {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Pines de Visitas Técnicas con texto horizontal equilibrado y estético */
+.vt-map-pin-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 2px 10px 2px 3px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22), 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    white-space: nowrap;
+    border: 1.5px solid #CBD5E1;
+}
+
+.vt-map-pin-pill:hover {
+    transform: scale(1.12) translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
+    z-index: 9999 !important;
+}
+
+.vt-map-pin-pill.realizada {
+    border-color: #10B981;
+}
+
+.vt-map-pin-pill.realizada .vt-map-pin-icon {
+    background: linear-gradient(135deg, #059669, #047857);
+    color: #FFFFFF;
+}
+
+.vt-map-pin-pill.realizada .vt-map-pin-text {
+    color: #065F46;
+}
+
+.vt-map-pin-pill.programada {
+    border-color: #F59E0B;
+}
+
+.vt-map-pin-pill.programada .vt-map-pin-icon {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+    color: #FFFFFF;
+}
+
+.vt-map-pin-pill.programada .vt-map-pin-text {
+    color: #92400E;
+}
+
+.vt-map-pin-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9.5px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.vt-map-pin-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 1.15;
+    text-align: left;
+}
+
+.vt-map-pin-text {
+    font-size: 9.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.1;
+}
+
+.vt-map-pin-sub {
+    font-size: 8px;
+    font-weight: 600;
+    color: #475569;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    opacity: 0.85;
+    line-height: 1.1;
+    margin-top: 0.5px;
+}
+
+/* Micro-etiquetas dentro del día del calendario mensual con subtítulo de supervisor */
+.vt-cal-visit-pill {
+    padding: 2.5px 5px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-width: 1px;
+    border-style: solid;
+    line-height: 1.15;
+    transition: all 0.15s ease;
+    overflow: hidden;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.vt-cal-visit-pill:hover {
+    transform: scale(1.02);
+}
+
+.vt-cal-visit-pill.realizada {
+    background-color: #ECFDF5;
+    border-color: #A7F3D0;
+    color: #065F46;
+}
+
+.vt-cal-visit-pill.programada {
+    background-color: #FFFBEB;
+    border-color: #FDE68A;
+    color: #92400E;
+}
+
+.vt-cal-pill-content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    line-height: 1.15;
+    min-width: 0;
+}
+
+.vt-cal-visit-pill .pill-muni {
+    font-size: 8.5px;
+    font-weight: 800;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.vt-cal-visit-pill .pill-sup {
+    font-size: 7.5px;
+    font-weight: 600;
+    color: #475569;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    opacity: 0.85;
+}
+
+/* Casillas del Calendario: Hover dinámico y Estado Seleccionado */
+.vt-cal-day-cell {
+    cursor: pointer;
+    transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background-color 0.16s ease;
+}
+
+.vt-cal-day-cell .vt-cal-day-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #475569;
+    transition: all 0.15s ease;
+}
+
+.vt-cal-day-cell .vt-cal-day-num.has-visits {
+    color: #0f172a;
+    font-weight: 800;
+}
+
+/* Hover dinámico: borde verde esmeralda, fondo suave, elevación */
+.vt-cal-day-cell:hover {
+    border-color: #10B981 !important;
+    background-color: #F0FDF4 !important;
+    box-shadow: 0 4px 14px -2px rgba(16, 185, 129, 0.25) !important;
+    transform: translateY(-2px);
+    z-index: 10;
+}
+
+.vt-cal-day-cell:hover .vt-cal-day-num {
+    color: #059669;
+    font-weight: 800;
+}
+
+/* Estado Seleccionado: Anillo verde esmeralda destacado y badge en número */
+.vt-cal-day-cell.selected {
+    border-color: #059669 !important;
+    box-shadow: 0 0 0 2px #059669, 0 6px 16px -2px rgba(5, 150, 105, 0.3) !important;
+    background-color: #ECFDF5 !important;
+    z-index: 20;
+}
+
+.vt-cal-day-cell.selected .vt-cal-day-num {
+    background-color: #059669 !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(5, 150, 105, 0.35) !important;
+    font-weight: 800 !important;
+}
+
+.vt-cal-day-cell.selected:hover {
+    background-color: #ECFDF5 !important;
+    transform: translateY(-2px);
+}
+
+.vt-marker-pin-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px;
+    pointer-events: auto;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.vt-marker-pin-wrap:hover {
+    transform: scale(1.15) translateY(-3px);
+    z-index: 9999 !important;
+}
+
+.vt-marker-pin-wrap:hover .vt-pin-info-card {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.vt-map-pin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.vt-map-pin.realizada {
+    background: linear-gradient(135deg, #059669, #047857);
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}
+
+.vt-map-pin.programada {
+    background: linear-gradient(135deg, #F59E0B, #D97706);
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+}
+
+.vt-map-pin-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: vt-pin-pulse 2s infinite cubic-bezier(0.24, 0, 0.38, 1);
+    pointer-events: none;
+}
+
+.vt-map-pin.realizada .vt-map-pin-pulse {
+    background: rgba(16, 185, 129, 0.5);
+}
+
+.vt-map-pin.programada .vt-map-pin-pulse {
+    background: rgba(245, 158, 11, 0.5);
+}
+
+/* Tarjeta / Etiqueta debajo del icono con Municipio, Supervisor y Fecha */
+.vt-pin-info-card {
+    margin-top: 4px;
+    padding: 3px 6px 4px 6px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(4px);
+    border-radius: 7px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22), 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 1.5px solid #E2E8F0;
+    max-width: 135px;
+    width: max-content;
+    line-height: 1.22;
+    pointer-events: none;
+    transition: all 0.2s ease;
+}
+
+.vt-pin-info-card.realizada {
+    border-color: #10B981;
+    border-top: 2.5px solid #059669;
+}
+
+.vt-pin-info-card.realizada .vt-pin-muni {
+    color: #047857;
+}
+
+.vt-pin-info-card.programada {
+    border-color: #F59E0B;
+    border-top: 2.5px solid #D97706;
+}
+
+.vt-pin-info-card.programada .vt-pin-muni {
+    color: #B45309;
+}
+
+.vt-pin-muni {
+    font-size: 9.5px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    display: block;
+}
+
+.vt-pin-sup {
+    font-size: 8.5px;
+    font-weight: 600;
+    color: #334155;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    margin-top: 1px;
+    display: block;
+}
+
+.vt-pin-date {
+    font-size: 8px;
+    font-weight: 700;
+    color: #64748B;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 1px;
+    background: #F1F5F9;
+    padding: 0.5px 4px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+@keyframes vt-pin-pulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
+
+    70% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(2.4);
+        opacity: 0;
+    }
+}
+
+/* Estilos de Popup Leaflet de Visitas */
+.leaflet-popup-content-wrapper {
+    border-radius: 16px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.2) !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+}
+
+.leaflet-popup-content {
+    margin: 0 !important;
+    line-height: 1.4 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.vt-popup-card {
+    min-width: 260px;
+    max-width: 320px;
+    background: #FFFFFF;
+}
+
+.vt-popup-header {
+    padding: 12px 14px;
+    border-bottom: 1px solid #E2E8F0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.vt-popup-header.realizada {
+    background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+    border-bottom: 1px solid #A7F3D0;
+}
+
+.vt-popup-header.programada {
+    background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+    border-bottom: 1px solid #FDE68A;
+}
+
+.vt-popup-body {
+    padding: 12px 14px;
+    font-size: 11.5px;
+    color: #334155;
+    space-y: 6px;
+}
+
+.vt-popup-footer {
+    padding: 10px 14px;
+    background: #F8FAFC;
+    border-top: 1px solid #E2E8F0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+/* Tarjeta Individual de Visita (Grid View) */
+.vt-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 18px;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+}
+
+.vt-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.08);
+    border-color: #CBD5E1;
+}
+
+.vt-card.realizada {
+    border-top: 4px solid #10B981;
+}
+
+.vt-card.programada {
+    border-top: 4px solid #F59E0B;
+}
+
+.vt-badge-realizada {
+    background: #ECFDF5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-weight: 800;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.vt-badge-programada {
+    background: #FFFBEB;
+    color: #92400E;
+    border: 1px solid #FDE68A;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-weight: 800;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Chips de Supervisores Seleccionados */
+.vt-sup-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #F3E8FF;
+    color: #6B21A8;
+    border: 1px solid #D8B4FE;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    transition: all 0.15s ease;
+}
+
+.vt-sup-chip button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #9333EA;
+    font-size: 12px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.vt-sup-chip button:hover {
+    color: #581C87;
+}
+
+.vt-sup-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 11.5px;
+    transition: background 0.15s;
+    user-select: none;
+}
+
+.vt-sup-option:hover {
+    background: #F8FAFC;
+}
+
+.vt-sup-option.selected {
+    background: #F5F3FF;
+    color: #6B21A8;
+    font-weight: 700;
+}
+
+/* Indicador de selector desplegable con flecha visible */
+.vt-select-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.vt-select-wrapper select {
+    padding-right: 28px !important;
+    cursor: pointer;
+}
+
+.vt-select-chevron {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748B;
+    font-size: 11px;
+    pointer-events: none;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.vt-select-wrapper:focus-within .vt-select-chevron {
+    color: #10B981;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Combobox Unificado de Convenios */
+.vt-combobox-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.vt-combobox-item {
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+}
+
+.vt-combobox-item:hover,
+.vt-combobox-item.active {
+    background: #F8FAFC;
+    border-color: #CBD5E1;
+}
+
+.vt-combobox-item.selected {
+    background: #ECFDF5;
+    border-color: #A7F3D0;
+}
+
+.vt-combobox-badge {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #065F46;
+    background: #D1FAE5;
+    padding: 2px 7px;
+    border-radius: 6px;
+    border: 1px solid #A7F3D0;
+    display: inline-flex;
+    align-items: center;
+}
+
+.vt-combobox-muni {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #1E293B;
+    background: #F1F5F9;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.vt-combobox-subregion {
+    font-size: 10px;
+    color: #64748B;
+}
+
+.vt-combobox-via {
+    font-size: 11px;
+    color: #475569;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ============================================================
+   INTERACTIVIDAD DE TARJETAS DE INDICADORES (META-CARDS)
+   ============================================================ */
+.meta-card {
+    cursor: pointer !important;
+    position: relative;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease !important;
+}
+
+.meta-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.14), 0 0 0 1.5px #0B5640 !important;
+}
+
+.meta-card-action {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(226, 232, 240, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0B5640;
+    transition: color 0.15s ease;
+}
+
+.meta-card:hover .meta-card-action {
+    color: #043828;
+}
+
+.meta-card:hover .meta-card-action i.fa-chevron-right {
+    transform: translateX(3px);
+}
+
+.meta-card-action i.fa-chevron-right {
+    transition: transform 0.2s ease;
+}
+
+/* Modal Detalle de Indicadores */
+#modal-indicador-detalle table tr:hover {
+    background-color: #F8FAFC;
+}
+
+.modal-ind-badge-cuatrenio {
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #FCD34D;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+/* ============================================================
+   NUEVO SISTEMA DE DISEÑO: PORTAL DEL SUPERVISOR DIAT (v3.5)
+   Estética Institucional Gobernación de Antioquia & Funcionalidad
+   ============================================================ */
+
+/* Banner Hero del Supervisor */
+.portal-hero-banner {
+    background: linear-gradient(135deg, #063826 0%, #0B5640 50%, #043828 100%);
+    border-radius: 20px;
+    padding: 24px 28px;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px -5px rgba(6, 56, 38, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.portal-hero-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, rgba(11, 86, 64, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.portal-hero-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: 20%;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(242, 142, 24, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Avatar del Supervisor con indicador de estado */
+.portal-avatar-wrap {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+}
+
+.portal-avatar-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #10B981, #065F46);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.portal-avatar-status {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 14px;
+    height: 14px;
+    background-color: #10B981;
+    border: 2px solid #063826;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10B981;
+}
+
+/* Badges Institucionales del Header */
+.portal-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.portal-badge-role {
+    background: rgba(255, 255, 255, 0.12);
+    color: #E2E8F0;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(4px);
+}
+
+.portal-badge-security-ok {
+    background: rgba(16, 185, 129, 0.2);
+    color: #A7F3D0;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.portal-badge-security-warn {
+    background: rgba(245, 158, 11, 0.2);
+    color: #FDE68A;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+/* Botones de acción del Header */
+.portal-btn-action-primary {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 11.5px;
+    letter-spacing: 0.03em;
+    padding: 9px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+}
+
+.portal-btn-action-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+    filter: brightness(1.08);
+}
+
+.portal-btn-action-secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 11.5px;
+    padding: 9px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.18s ease;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+}
+
+.portal-btn-action-secondary:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.portal-btn-action-danger {
+    background: rgba(239, 68, 68, 0.15);
+    color: #FECACA;
+    font-weight: 600;
+    font-size: 11.5px;
+    padding: 9px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.18s ease;
+    cursor: pointer;
+}
+
+.portal-btn-action-danger:hover {
+    background: rgba(239, 68, 68, 0.3);
+    color: #FFFFFF;
+}
+
+/* Tarjetas Hero de KPIs (Top 4) */
+.portal-hero-kpi-card {
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 18px;
+    padding: 18px 20px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.portal-hero-kpi-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08);
+    border-color: #CBD5E1;
+}
+
+.portal-hero-kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5px;
+    background: #CBD5E1;
+}
+
+.portal-hero-kpi-card.accent-emerald::before {
+    background: linear-gradient(90deg, #0B5640, #10B981);
+}
+
+.portal-hero-kpi-card.accent-blue::before {
+    background: linear-gradient(90deg, #1D4ED8, #38BDF8);
+}
+
+.portal-hero-kpi-card.accent-amber::before {
+    background: linear-gradient(90deg, #D97706, #FBBF24);
+}
+
+.portal-hero-kpi-card.accent-red::before {
+    background: linear-gradient(90deg, #DC2626, #F87171);
+}
+
+/* Barra Operativa Secundaria */
+.portal-secondary-bar {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 12px 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.portal-sec-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.portal-sec-stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0B5640;
+    font-size: 14px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.02);
+}
+
+/* Navegación por Sub-Pestañas Segmentadas */
+.portal-segmented-nav {
+    display: flex;
+    background: #F1F5F9;
+    padding: 5px;
+    border-radius: 16px;
+    gap: 4px;
+    overflow-x: auto;
+    border: 1px solid #E2E8F0;
+}
+
+.portal-segmented-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #64748B;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+.portal-segmented-btn:hover {
+    color: #0B5640;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.portal-segmented-btn.active {
+    background: #FFFFFF;
+    color: #0B5640;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    font-weight: 800;
+}
+
+.portal-segmented-count {
+    background: #E2E8F0;
+    color: #475569;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 9999px;
+    transition: all 0.18s ease;
+}
+
+.portal-segmented-btn.active .portal-segmented-count {
+    background: #ECFDF5;
+    color: #065F46;
+}
+
+/* Tarjetas Operativas de Convenios (Grid Rediseñado) */
+.portal-convenio-card-v2 {
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+    position: relative;
+}
+
+.portal-convenio-card-v2:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px -6px rgba(15, 23, 42, 0.08);
+    border-color: #0B5640;
+}
+
+.portal-card-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.portal-card-id-badge {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    font-weight: 800;
+    color: #0F172A;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.portal-card-btn-copy {
+    color: #94A3B8;
+    cursor: pointer;
+    font-size: 11px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    transition: all 0.15s;
+}
+
+.portal-card-btn-copy:hover {
+    color: #0B5640;
+    background: #ECFDF5;
+}
+
+.portal-dual-progress-wrap {
+    background: #F8FAFC;
+    border: 1px solid #F1F5F9;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 16px;
+}
+
+.portal-card-actions-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding-top: 14px;
+    border-top: 1px solid #F1F5F9;
+}
+
+.portal-card-actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+}
+
+.portal-card-btn-edit {
+    padding: 8px 6px;
+    background: #ECFDF5;
+    color: #065F46;
+    border: 1px solid #A7F3D0;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+
+.portal-card-btn-edit:hover {
+    background: #0B5640;
+    color: #FFFFFF;
+    border-color: #0B5640;
+}
+
+.portal-card-btn-visit {
+    padding: 8px 6px;
+    background: #EFF6FF;
+    color: #1D4ED8;
+    border: 1px solid #BFDBFE;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+
+.portal-card-btn-visit:hover {
+    background: #1D4ED8;
+    color: #FFFFFF;
+    border-color: #1D4ED8;
+}
+
+.portal-card-btn-detail {
+    width: 100%;
+    padding: 9px 14px;
+    background: #F8FAFC;
+    color: #334155;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 10px;
+    font-size: 11.5px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.portal-card-btn-detail:hover {
+    background: #0B5640;
+    color: #FFFFFF;
+    border-color: #0B5640;
+    box-shadow: 0 4px 12px rgba(11, 86, 64, 0.25);
+    transform: translateY(-1px);
+}
+
+.portal-card-btn-detail:hover i {
+    color: #FFFFFF !important;
+}
+
+/* Toolbar de búsqueda y filtros para convenios del supervisor */
+.portal-toolbar {
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    sm: flex-row;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.portal-search-box {
+    position: relative;
+    flex: 1;
+    width: 100%;
+}
+
+.portal-search-input {
+    width: 100%;
+    padding: 9px 14px 9px 36px;
+    background: #F8FAFC;
+    border: 1px solid #CBD5E1;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #1E293B;
+    outline: none;
+    transition: all 0.15s ease;
+}
+
+.portal-search-input:focus {
+    background: #FFFFFF;
+    border-color: #0B5640;
+    box-shadow: 0 0 0 3px rgba(11, 86, 64, 0.1);
+}
+
+.portal-filter-chips {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto;
+    width: 100%;
+    sm: width: auto;
+}
+
+.portal-filter-chip {
+    padding: 6px 12px;
+    background: #F1F5F9;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+}
+
+.portal-filter-chip:hover {
+    background: #E2E8F0;
+    color: #1E293B;
+}
+
+.portal-filter-chip.active {
+    background: #ECFDF5;
+    border-color: #A7F3D0;
+    color: #065F46;
+    font-weight: 700;
+}
+
+/* Tarjeta de Seguridad y Perfil */
+.portal-profile-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    lg: grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.portal-security-box {
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+}
+
+/* ============================================================
+   ANIMACIÓN Y ESTILOS DEL MODAL DE LOGIN DIAT (v3.5)
+   ============================================================ */
+@keyframes modal-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.login-modal-card {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1.5px solid rgba(226, 232, 240, 0.9);
+    box-shadow: 0 25px 50px -12px rgba(6, 56, 38, 0.28), 0 0 0 1px rgba(11, 86, 64, 0.08);
+    animation: modal-fade-in 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 100%;
+    max-width: 410px;
+    overflow: hidden;
+}
+
+.login-modal-header {
+    background: linear-gradient(135deg, #063826 0%, #0B5640 60%, #084c37 100%);
+    padding: 26px 24px 22px;
+    text-align: center;
+    position: relative;
+    color: #ffffff;
+}
+
+.login-modal-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.login-modal-body {
+    padding: 24px 24px 26px;
+    background: #ffffff;
+}
+
+.login-input-group {
+    margin-bottom: 18px;
+}
+
+.login-input-group label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #064E3B;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 7px;
+}
+
+.login-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.login-input-icon {
+    position: absolute;
+    left: 14px;
+    color: #0B5640;
+    font-size: 13px;
+    pointer-events: none;
+    transition: color 0.2s;
+}
+
+.login-input-field {
+    width: 100%;
+    font-size: 13px;
+    padding: 12px 42px 12px 38px;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 12px;
+    font-weight: 600;
+    color: #0F172A;
+    background: #F8FAFC;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.login-input-field:focus {
+    background: #ffffff;
+    border-color: #0B5640;
+    box-shadow: 0 0 0 3.5px rgba(11, 86, 64, 0.14);
+}
+
+.login-input-field.input-username {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.login-toggle-pw {
+    position: absolute;
+    right: 12px;
+    background: transparent;
+    border: none;
+    color: #64748B;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s, background 0.15s;
+}
+
+.login-toggle-pw:hover {
+    color: #0B5640;
+    background: #F1F5F9;
+}
+
+.login-quick-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #0B5640;
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    border-radius: 6px;
+    padding: 2.5px 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.login-quick-chip:hover {
+    background: #0B5640;
+    color: #ffffff;
+    border-color: #0B5640;
+}
+
+.login-submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #0B5640 0%, #10B981 100%);
+    color: #ffffff;
+    border: none;
+    padding: 13px 18px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(11, 86, 64, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.login-submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(11, 86, 64, 0.35);
+    background: linear-gradient(135deg, #063826 0%, #059669 100%);
+}
+
+.login-submit-btn:active {
+    transform: translateY(0);
+}
+
+/* =============================================================================
+   31. BOTÓN FLOTANTE: EXPORTAR FICHA PDF (RESUMEN EJECUTIVO)
+   ============================================================================= */
+.btn-floating-pdf {
+    position: fixed !important;
+    bottom: 92px !important;
+    right: 24px !important;
+    z-index: 9998 !important;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 20px;
+    background: linear-gradient(135deg, #0B5640 0%, #018D38 100%);
+    color: #FFFFFF !important;
+    font-family: var(--font-body, system-ui, -apple-system, sans-serif);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 25px -4px rgba(11, 86, 64, 0.5), 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, box-shadow 0.25s ease;
+    backdrop-filter: blur(8px);
+}
+
+.btn-floating-pdf:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 14px 30px -3px rgba(11, 86, 64, 0.6), 0 6px 14px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #084332 0%, #01762F 100%);
+}
+
+.btn-floating-pdf:active {
+    transform: translateY(1px) scale(0.97);
+}
+
+.btn-floating-pdf.hidden {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(24px) scale(0.9) !important;
+    visibility: hidden !important;
+}
+
+/* =============================================================================
+   32. BOTÓN DE ALTERNANCIA DE FILTROS COLAPSABLES
+   ============================================================================= */
+.btn-toggle-filters {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 11px;
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0;
+    color: #334155;
+    border-radius: 8px;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.btn-toggle-filters:hover {
+    background: #F8FAFC;
+    border-color: #CBD5E1;
+    color: #0F172A;
+}
+
+.btn-toggle-filters.active {
+    background: #F0FDF4;
+    border-color: #86EFAC;
+    color: #0B5640;
+}
+
+.btn-toggle-filters.active .toggle-chevron {
+    transform: rotate(180deg);
+}
+
+/* =============================================================================
+   33. GESTIÓN FOTOGRÁFICA DEL CONVENIO Y ALERTAS EN EL PORTAL DEL SUPERVISOR
+   ============================================================================= */
+.portal-convenio-alert-no-photos {
+    background: #FFFBEB;
+    border: 1.5px solid #FDE68A;
+    color: #92400E;
+    border-radius: 9px;
+    padding: 7px 11px;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 10px;
+    animation: fadeIn 0.3s ease;
+}
+
+.portal-convenio-photos-badge {
+    background: #F0FDF4;
+    border: 1.5px solid #BBF7D0;
+    color: #166534;
+    border-radius: 9px;
+    padding: 7px 11px;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 10px;
+    animation: fadeIn 0.3s ease;
+}
+
+.portal-card-btn-photos {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 7px 12px;
+    background: #F0FDF4;
+    color: #0B5640;
+    border: 1.5px solid #BBF7D0;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.portal-card-btn-photos:hover {
+    background: #DCFCE7;
+    color: #064E3B;
+    border-color: #86EFAC;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(11, 86, 64, 0.15);
+}
+
+.portal-filter-chip-sin-fotos {
+    background: #FFFBEB !important;
+    border-color: #FCD34D !important;
+    color: #B45309 !important;
+    font-weight: 800 !important;
+}
+
+.portal-filter-chip-sin-fotos.active {
+    background: #F59E0B !important;
+    border-color: #D97706 !important;
+    color: #FFFFFF !important;
+}
+
+.photo-mgr-tab {
+    padding: 8px 14px;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #64748B;
+    border-bottom: 2.5px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    background: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.photo-mgr-tab:hover {
+    color: #0B5640;
+}
+
+.photo-mgr-tab.active {
+    color: #0B5640;
+    border-bottom-color: #0B5640;
+    font-weight: 800;
+}
+
+.photo-upload-stage-btn {
+    padding: 4px 10px;
+    font-size: 10.5px;
+    font-weight: 700;
+    border-radius: 6px;
+    background: transparent;
+    color: #64748B;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.photo-upload-stage-btn.active {
+    background: #FFFFFF;
+    color: #0B5640;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-weight: 800;
+}
+
+.photo-card-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    aspect-ratio: 4 / 3;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.photo-card-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.photo-card-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.photo-card-stage-pill {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    font-size: 9.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: rgba(15, 23, 42, 0.78);
+    color: #FFFFFF;
+    backdrop-filter: blur(4px);
+    letter-spacing: 0.03em;
+}
+
+.photo-card-delete-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(239, 68, 68, 0.9);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.photo-card-item:hover .photo-card-delete-btn {
+    opacity: 1;
+}
+
+.photo-card-delete-btn:hover {
+    background: #DC2626;
+    transform: scale(1.1);
+}
+
+/* =============================================================================
+   34. OPTIMIZACIONES MOBILE PARA EL DASHBOARD
+   ============================================================================= */
+@media (max-width: 768px) {
+    main.custom-scrollbar {
+        padding: 12px 10px !important;
+    }
+    .filter-section {
+        padding: 12px 14px !important;
+        margin-bottom: 12px !important;
+    }
+    .filter-section-header {
+        gap: 8px !important;
+    }
+    .btn-floating-pdf {
+        bottom: 88px !important;
+        right: 16px !important;
+        padding: 9px 15px !important;
+        font-size: 11px !important;
+        z-index: 9998 !important;
+    }
+    .kpi-card {
+        padding: 12px 12px !important;
+    }
+    .kpi-value {
+        font-size: 1.5rem !important;
+    }
+    .kpi-label {
+        font-size: 10.5px !important;
+    }
+}
+
+/* =============================================================================
+   35. BOTONES SEGMENTADOS DE MODO: FLUJO FINANCIERO
+   ============================================================================= */
+.flujo-mode-btn {
+    border: none;
+    outline: none;
+    user-select: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.flujo-mode-btn:focus-visible {
+    box-shadow: 0 0 0 2px rgba(139, 74, 151, 0.35);
+}
+.flujo-mode-btn.active {
+    font-weight: 800;
+}
+.dark .flujo-mode-btn.active {
+    background-color: #334155 !important;
+}
+
+/* =============================================================================
+   36. GEOVISOR TERRITORIAL: PANTALLA COMPLETA Y CONTROLES
+   ============================================================================= */
+#card-geovisor.card-geovisor-fullscreen {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 999999 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #FFFFFF !important;
+}
+
+#card-geovisor.card-geovisor-fullscreen > div:last-child {
+    height: calc(100vh - 58px) !important;
+    min-height: calc(100vh - 58px) !important;
+    flex: 1 1 auto !important;
+}
+
+#card-geovisor.card-geovisor-fullscreen #synthetic-map {
+    width: 100% !important;
+    height: 100% !important;
+}
